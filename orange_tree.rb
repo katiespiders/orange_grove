@@ -8,13 +8,12 @@ class OrangeGrove
     @soil_quality = 100
 
     set_soil_quality(num_new_trees)
-    num_new_trees.times do
-      @trees << OrangeTree.new(0, 0, 0, @soil_quality)
-    end
+    plant_trees(num_new_trees)
+
   end
 
   def plant_trees(num_new_trees)
-    soil_damage = num_new_trees
+    soil_damage = (num_new_trees.to_f / @capacity) * 100
     if @soil_quality - soil_damage <= 0
       puts "The grove is too crowded. You have room for only #{@capacity - @trees.length} more trees."
     else
@@ -69,7 +68,7 @@ class OrangeGrove
       end
 
       if @age > 0
-        puts "Transplanted a #{@age}-year-old #{@age_category} tree, #{@height} feet tall with #{@orange_count} oranges."
+        puts "Transplanted a #{@age}-year-old #{@age_category} tree, #{display_height} feet tall with #{@orange_count} oranges."
       else
         puts "Planted a new orange tree, which will start producing fruit in #{@to_young_tree.ceil} years."
       end
@@ -123,13 +122,19 @@ class OrangeGrove
       end
     end
 
+    def display_height
+      inches = ((@height % 1) * 12).round
+      feet = @height.floor
+      return "#{feet}\' #{inches}\""
+    end
+
     def one_year_passes(soil_quality)
       if not @age_category == :dead
         @age += 1
         @age_category = get_age_category
         @height, @orange_count = grow(soil_quality)
       end
-      description = "Tree is a #{@age}-year-old #{@age_category} tree, #{@height} feet tall with #{@orange_count} oranges."
+      description = "Tree is a #{@age}-year-old #{@age_category} tree, #{display_height} feet tall with #{@orange_count} oranges."
       puts description
       return description
     end
