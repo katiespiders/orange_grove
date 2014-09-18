@@ -111,6 +111,7 @@
         @orange_count -= n
         puts "You have #{@orange_count} oranges left."
       end
+      puts
     end
 
     def eat_oranges

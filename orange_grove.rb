@@ -1,5 +1,5 @@
-require './broken_orange_tree.rb'
-require './broken_grove_painter.rb'
+require './orange_tree.rb'
+require './grove_painter.rb'
 
 class OrangeGrove
 
@@ -41,14 +41,6 @@ class OrangeGrove
       @trees << OrangeTree.new(0, 0, 0, @soil_quality)
     end
 
-    puts "Planted #{n} trees, to total of #{size}"
-    if size%8==0
-      if size>8
-        puts "THIS WILL BREAK!!!"
-      else
-        puts "WILL THIS BREAK???"
-      end
-    end
     GrovePainter.new(self)
   end
 

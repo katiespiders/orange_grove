@@ -63,7 +63,6 @@
       end
 
       draw_row(current_row, last_row_size)
-      puts "\n\n"
     end
 
     def draw_border
